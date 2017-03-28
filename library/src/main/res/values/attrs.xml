@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="KSpinner">
+        <attr name="backgroundColor" format="color"/>
+        <attr name="arrowColor" format="color"/>
+        <attr name="arrowWidth" format="dimension"/>
+        <attr name="style" format="enum">
+            <enum name="fill" value="0" />
+            <enum name="stroke" value="1" />
+            <enum name="fill_stroke" value="2" />
+        </attr>
+        <attr name="path" format="enum">
+            <enum name="open" value="0"/>
+            <enum name="close" value="1"/>
+        </attr>
+    </declare-styleable>
+</resources>
