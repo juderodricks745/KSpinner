@@ -16,7 +16,7 @@ class MainActivity : AppCompatActivity() {
         spinner3.setAdapter(cities)
         spinner3.setListener {
             onItemSelection { parent, view, position ->
-                Log.i("Log", "Value => ${parent.getItemAtPosition(position) as String}")
+                Log.i("Log", "Value => ${spinner3.getItemAtPosition(2)}")
             }
         }
     }
