@@ -6,85 +6,9 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="Default Spinner:"
-        android:textSize="15dp" />
-
-    <com.jude.spinnerlibrary.KSpinner
-        android:id="@+id/spinner"
-        android:layout_width="match_parent"
-        android:layout_height="30dp" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Spinner with different Arrow configuration:"
-        android:textSize="15dp" />
-
-    <com.jude.spinnerlibrary.KSpinner
-        android:id="@+id/spinner1"
-        android:layout_width="match_parent"
-        android:layout_height="30dp"
-        app:arrowColor="@android:color/white"
-        app:backgroundColor="@android:color/holo_red_dark"
-        app:path="open"
-        app:style="stroke" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:text="Spinner with random text to be displayed:"
-        android:textSize="15dp" />
-
-    <com.jude.spinnerlibrary.KSpinner
-        android:id="@+id/spinner2"
-        android:layout_width="match_parent"
-        android:layout_height="30dp" />
-
-    <Button
-        android:id="@+id/button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Get Spinner Text" />
-
-    <TextView
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="20dp"
-        android:text="Spinner with Events:"
-        android:textSize="15dp" />
-
     <com.jude.spinnerlibrary.KSpinner
         android:id="@+id/spinner3"
         android:layout_width="match_parent"
         android:layout_height="30dp" />
-
-    <TextView
-        android:id="@+id/spinnerOpenClose"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text=""
-        android:textSize="15dp" />
-
-    <TextView
-        android:id="@+id/spinnerText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text=""
-        android:textSize="15dp" />
-
-    <TextView
-        android:id="@+id/itemSelection"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
-        android:text=""
-        android:textSize="15dp" />
 
 </LinearLayout>
