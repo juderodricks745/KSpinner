@@ -7,16 +7,17 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
 
+    private var names = listOf("Select", "Jude", "Francis", "Brian")
     private var cities = arrayOf("Select", "Mumbai", "Delhi", "Kolkata", "Chennai")
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        spinner3.setAdapter(cities)
-        spinner3.setListener {
-            onItemSelection { parent, view, position ->
-                Log.i("Log", "Value => ${spinner3.getItemAtPosition(2)}")
+        spinner.setAdapter(names)
+        spinner.setListener {
+            onItemSelection { _, _, position ->
+                Log.i("Log", "Value => ${spinner.getItemAtPosition(position)}")
             }
         }
     }
