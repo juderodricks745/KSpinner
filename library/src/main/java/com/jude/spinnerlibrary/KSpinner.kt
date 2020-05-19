@@ -21,21 +21,21 @@ class KSpinner : RelativeLayout {
     private var strokeWidth = 5f
     private lateinit var paint: Paint
     private var strokeColor = Color.BLACK
-    private var backGroundColor = Color.WHITE
+    private var backGroundColor = Color.TRANSPARENT
 
     private var isTouch: Boolean = false
     private var isItemSelected: Boolean = false
 
-    private var strings: Array<String>? = null
+    private var strings: List<String> = mutableListOf()
     private var listener: OnItemSelectedListener? = null
     // endregion
 
     // region [ENUMS]
-    private enum class STYLE {
+    enum class STYLE {
         FILL, STROKE, FILL_STROKE
     }
 
-    private enum class PATH {
+    enum class PATH {
         OPEN, CLOSE
     }
     // endregion
@@ -101,9 +101,9 @@ class KSpinner : RelativeLayout {
         spinner?.setOnItemSelectedEvenIfUnchangedListener(object : AdapterView.OnItemSelectedListener {
             override fun onItemSelected(parent: AdapterView<*>, view: View, position: Int, id: Long) {
                 if (isTouch) {
+                    isTouch = false
                     isItemSelected = true
                     listener?.onItemSelected(parent, view, position)
-                    isTouch = false
                 }
             }
 
@@ -126,22 +126,27 @@ class KSpinner : RelativeLayout {
         })
     }
 
-    fun setAdapter(strings: Array<String>) {
-        this.strings = strings
-        val adapter = ArrayAdapter(context, android.R.layout.simple_list_item_1, android.R.id.text1, this.strings!!)
+    fun setAdapter(array: Int) {
+        this.strings = resources.getStringArray(array).toList()
+        setAdapter(this.strings)
+    }
+
+    fun setAdapter(list: List<String>) {
+        val adapter = ArrayAdapter(context, android.R.layout.simple_list_item_1, android.R.id.text1, list)
         spinner?.adapter = adapter
     }
 
-    fun setAdapter(array: Int) {
-        this.strings = resources.getStringArray(array)
-        setAdapter(this.strings!!)
+    fun setAdapter(strings: Array<String>) {
+        this.strings = strings.toList()
+        val adapter = ArrayAdapter(context, android.R.layout.simple_list_item_1, android.R.id.text1, this.strings)
+        spinner?.adapter = adapter
     }
 
     fun setSpinnerWithIndex(value: String?) {
-        if (strings.isNullOrEmpty()) {
-            throw RuntimeException("String array cannot be null or length cannot be '0'; Have you set values using 'setAdapter'")
+        if (strings.isEmpty()) {
+            throw RuntimeException("Please provide proper values; Have you set values using 'setAdapter'?")
         }
-        val index = strings?.indexOfFirst { it == value }
+        val index = strings.indexOfFirst { it == value }
         spinner?.setSelection(index ?: 0)
     }
 
@@ -159,7 +164,7 @@ class KSpinner : RelativeLayout {
     // endregion
 
     // region [PRIVATE METHODS]
-    private fun setArrowStyle(style: STYLE) {
+    fun setArrowStyle(style: STYLE) {
         when (style) {
             STYLE.FILL -> paint.style = Paint.Style.FILL
             STYLE.STROKE -> paint.style = Paint.Style.STROKE
@@ -167,11 +172,16 @@ class KSpinner : RelativeLayout {
         }
     }
 
-    private fun setArrowPath(path: PATH) {
+    fun setArrowPath(path: PATH) {
         when (path) {
             PATH.CLOSE -> arrowView?.setPathType(true)
             PATH.OPEN -> arrowView?.setPathType(false)
         }
+    }
+
+    fun setArrowStroke(strokeWidth: Float) {
+        this.strokeWidth = strokeWidth
+        arrowView?.invalidate()
     }
     // endregion
 
@@ -188,6 +198,9 @@ class KSpinner : RelativeLayout {
 
             relativeLayout?.addView(spinner, spinnerParams)
             relativeLayout?.addView(arrowView!!, arrowParams)
+
+            // Set Spinner properties
+            spinner?.background = null
             spinner?.dropDownVerticalOffset = h
         }, 10)
     }
